@@ -1,7 +1,7 @@
 Option Explicit
 Public Const Mname As String = "MyPopUpMenu"
 Public Const AppVersion As String = "1.0"
-Public Const Version_url As String = "https://kelt8080.github.io/Ray_vba/version.json"
+Public Const Version_url As String = "https://kelt8080.github.io/public/api/rpa/ExcelVBAProject/version.json"
 Public close_saved As String
 Public Declare PtrSafe Function FindWindow Lib "user32" Alias "FindWindowA" (ByVal lpClassName As String, ByVal lpWindowName As String) As LongPtr
 Public Declare PtrSafe Function SendMessage Lib "user32" Alias "SendMessageA" (ByVal hwnd As LongPtr, ByVal wMsg As Long, ByVal wParam As LongPtr, ByVal lParam As LongPtr) As LongPtr
@@ -1953,7 +1953,7 @@ End Function
 
 
 
-Sub frm_rec_log_googleforms()       '紀錄log_googleforms
+Function frm_rec_log_googleforms(StartTime As Date)        '紀錄log_googleforms
     Dim last_row_1, last_row_2 As String
     Dim s_path, t_path As String
     Dim last_range, input_range As Range
@@ -1964,10 +1964,8 @@ Sub frm_rec_log_googleforms()       '紀錄log_googleforms
     Dim strFolderExists As String
     Dim link(100), field(100), myURL, txt, str As String
     Dim myhttp As Object
-    Dim StartTime As Date
     
     
-    StartTime = CDate(Workbooks(ThisWorkbook.name).Sheets("報表參數").Range("R2").Value)
     If StartTime > 0 Then
         '需要有2個link
         link(1) = "https://docs.google.com/forms/d/1RdSVrhtYf59eGKB95gmyQhY0FwptkKejsRjPM1ku2Ok/formResponse?usp=pp_url&"
@@ -2002,7 +2000,7 @@ Sub frm_rec_log_googleforms()       '紀錄log_googleforms
     
 
 
-End Sub
+End Function
 
 
 
@@ -2684,6 +2682,8 @@ Function SwitchLayout(TIMEOUT As Long, targets_file As String)     '更換Autosi
     ' 顯示完成訊息
     MessageBoxTimeout 0, StrPtr("UI已成功切換成" & SourceFileName & "的佈置"), StrPtr("完成"), MB_OK Or MB_SYSTEMMODAL, 0, TIMEOUT
 End Function
+
+
 
 
 
