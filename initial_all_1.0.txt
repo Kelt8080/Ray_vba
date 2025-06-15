@@ -1,7 +1,7 @@
 Option Explicit
 Public Const Mname As String = "MyPopUpMenu"
 Public Const AppVersion As String = "1.0"
-Public Const Version_url As String = "https://kelt8080.github.io/public/api/rpa/ExcelVBAProject/version.json"
+Public Const Version_url As String = "https://kelt8080.github.io/Ray_vba/version.json"
 Public close_saved As String
 Public Declare PtrSafe Function FindWindow Lib "user32" Alias "FindWindowA" (ByVal lpClassName As String, ByVal lpWindowName As String) As LongPtr
 Public Declare PtrSafe Function SendMessage Lib "user32" Alias "SendMessageA" (ByVal hwnd As LongPtr, ByVal wMsg As Long, ByVal wParam As LongPtr, ByVal lParam As LongPtr) As LongPtr
