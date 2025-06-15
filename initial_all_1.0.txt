@@ -2020,13 +2020,11 @@ Sub frm_email_googleforms()       'email_googleforms
     Dim i, j, k As Integer
 
     '初始化
-    gmail_auto = para_range_gmail_auto(2)
     gmail_to_String = para_range_gmail_to(2)
     gmail_subject_String = para_range_gmail_subject(2)
     gmail_body_String = para_range_gmail_body(2)
     
     '參數清洗
-    If gmail_auto <> "Y" Then GoTo exit_sub
     If gmail_to_String = "" Then GoTo exit_sub
     If gmail_subject_String = "" Then GoTo exit_sub
     
@@ -2448,7 +2446,7 @@ Sub email_report()      '發出outlook email
             .Attachments.Add outlook_attachments 'You can add files here
          End If
          '.Display
-         If outlook_auto = "Y" Then
+         If outlook_auto = "自動" Then
             .Send
             Application.Wait (Now + TimeValue("00:00:10"))
             Set oOutlook = GetObject(, "Outlook.Application")
@@ -2682,6 +2680,10 @@ Function SwitchLayout(TIMEOUT As Long, targets_file As String)     '更換Autosi
     ' 顯示完成訊息
     MessageBoxTimeout 0, StrPtr("UI已成功切換成" & SourceFileName & "的佈置"), StrPtr("完成"), MB_OK Or MB_SYSTEMMODAL, 0, TIMEOUT
 End Function
+
+
+
+
 
 
 
