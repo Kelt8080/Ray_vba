@@ -2401,7 +2401,6 @@ Sub email_report()      '發出outlook email
     outlook_attachments = para_range_email_attachment(3)
     
     '參數清洗
-    If outlook_auto <> "Y" Then GoTo exit_sub
     If outlook_email = "" Then GoTo exit_sub
     If outlook_subject = "" Then GoTo exit_sub
     If FileFolderExists(outlook_attachments) Then
@@ -2449,16 +2448,17 @@ Sub email_report()      '發出outlook email
             .Attachments.Add outlook_attachments 'You can add files here
          End If
          '.Display
-         .Send
-         Application.Wait (Now + TimeValue("00:00:10"))
+         If outlook_auto = "Y" Then
+            .Send
+            Application.Wait (Now + TimeValue("00:00:10"))
+            Set oOutlook = GetObject(, "Outlook.Application")
+            oOutlook.Quit
+         End If
     End With
 
 exit_sub:
 
-
-
-    Set oOutlook = GetObject(, "Outlook.Application")
-    oOutlook.Quit
+    
     Set OutMail = Nothing
     Set OutApp = Nothing
     
@@ -2682,6 +2682,7 @@ Function SwitchLayout(TIMEOUT As Long, targets_file As String)     '更換Autosi
     ' 顯示完成訊息
     MessageBoxTimeout 0, StrPtr("UI已成功切換成" & SourceFileName & "的佈置"), StrPtr("完成"), MB_OK Or MB_SYSTEMMODAL, 0, TIMEOUT
 End Function
+
 
 
 
